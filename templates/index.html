@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+			<div class="page-title">
+              <div class="title_left">
+                <h1>{{ title }}</h1>
+              </div>
+			<div class="title_right">
+                <div class="col-md-5 col-sm-5  form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Поисковик">
+                    <span class="input-group-btn">
+                      <button class="btn btn-secondary" type="button">Найти</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="x_panel">
+                  <div class="x_content">
+                    {% for question in questions %}
+                      <h2>{{ question.name }}</h2>
+                      {% for answer in answers %}
+                        <ul>
+                          <li>{{ answer.title }}</li>
+                        </ul>
+                      {% endfor %}
+                    {% endfor%}
+                  </div>
+              </div>
+            </div>
+          </div>
+{% endblock %}
