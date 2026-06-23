@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% load objects_extras %}
+
+{% load static %}
+
+{% block content %}
+			<div class="page-title">
+              <div class="title_left">
+                <h1>{{ title }}</h1>
+              </div>
+			<div class="title_right">
+                <div class="col-md-5 col-sm-5  form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Поисковик">
+                    <span class="input-group-btn">
+                      <button class="btn btn-secondary" type="button">Найти</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="x_panel">
+                  <div class="x_content">
+                      <h2>
+                        {{ answer.title }}
+                      </h2>
+                  </div>
+                  <div class=" col-sm-6 emphasis">
+                     <p class="ratings">
+                      <a>4.0</a>
+                      <a href="#"><span class="fa fa-star"></span></a>
+                      <a href="#"><span class="fa fa-star"></span></a>
+                      <a href="#"><span class="fa fa-star"></span></a>
+                       <a href="#"><span class="fa fa-star"></span></a>
+                      <a href="#"><span class="fa fa-star-o"></span></a>
+                    </p>
+                 </div>
+              </div>
+              <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <div id="myTabContent" class="tab-content">
+                          <div role="tabpanel" class="tab-pane active " id="tab_content1" aria-labelledby="home-tab">
+                             <form class="form-label-left input_mask" method="POST">
+                              {% csrf_token %}
+                              {{ form.as_p }}
+                              <div class="ln_solid"></div>
+                              <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                  <button type="submit" class="btn btn-success">Создать</button>
+                                </div>
+                              </div>
+                              </form>
+                            </div>
+                            <!-- start recent activity -->
+                            <ul class="messages">
+                              {% for comment in comment_user|lookup:answer.pk  %}
+                              <li>
+                                <img src="#" class="avatar" alt="Avatar">
+                                <div class="message_date">
+                                  <h3 class="date text-info">{{ comment.created_at|date:'d' }}</h3>
+                                  <p class="month">{{ comment.created_at|date:'m' }}</p>
+                                </div>
+                                <div class="message_wrapper">
+                                  <h4 class="heading">{{ request.user.profile.get_name }}</h4>
+                                  <blockquote class="message">
+                                    {{ comment.text }}
+                                  </blockquote>
+                                  <br />
+                                  <p class="url">
+                                    <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                                    <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>
+                                  </p>
+                                </div>
+                                <div class=" col-sm-6 emphasis">
+                                  <p class="ratings">
+                                    <a>4.0</a>
+                                    <a href="#"><span class="fa fa-star"></span></a>
+                                    <a href="#"><span class="fa fa-star"></span></a>
+                                    <a href="#"><span class="fa fa-star"></span></a>
+                                    <a href="#"><span class="fa fa-star"></span></a>
+                                    <a href="#"><span class="fa fa-star-o"></span></a>
+                                  </p>
+                                </div>
+                              </li>
+                              {% endfor %}
+                              
+                            </ul>
+                            <!-- end recent activity -->
+
+                          </div>
+                          
+                        </div>
+                      </div>
+            </div>
+          </div>
+{% endblock %}
